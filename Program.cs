@@ -627,13 +627,6 @@ namespace ClimateNetwork
                     {
                         cXY = 0;
                     }
-                    /*if (sigmaX * sigmaY != 0)
-                    {
-                        //cXY = (SumOfXYRemained / CountOfRemained - (SumOfXRemained * SumOfYRemained) / (CountOfRemained * CountOfRemained)) / (sigmaX * sigmaY);
-                        cXY = (CountOfRemained * SumOfXYRemained - SumOfXRemained * SumOfYRemained) /
-                        (Math.Sqrt(CountOfRemained * SumSquaredOfXRemained - SumOfXRemained * SumOfXRemained) *
-                        Math.Sqrt(CountOfRemained * SumSquaredOfYRemained - SumOfYRemained * SumOfYRemained));
-                    }*/
                     if (double.IsNaN(cXY))
                     {
                         throw new ArgumentException($"denominator: {Math.Sqrt(CountOfRemained * SumSquaredOfXRemained - SumOfXRemained * SumOfXRemained) * Math.Sqrt(CountOfRemained * SumSquaredOfYRemained - SumOfYRemained * SumOfYRemained)}" +
@@ -641,24 +634,6 @@ namespace ClimateNetwork
                             $"SumOfXYRemained: {SumOfXYRemained} SumOfXRemained: {SumOfXRemained} SumOfYRemained: {SumOfYRemained} " +
                             $"SumSquaredOfXRemained: {SumSquaredOfXRemained} SumSquaredOfYRemained: {SumSquaredOfYRemained} " +
                             $"CountOfRemained: {CountOfRemained} sigmaX: {sigmaX} sigmaY: {sigmaY}");
-                        /*if (double.IsNaN(sigmaX))
-                        {
-                            sigmaX = 0;
-                            cXY = 0;
-                        }
-                        else if (double.IsNaN(sigmaY))
-                        {
-                            sigmaY = 0;
-                            cXY = 0;
-                        }
-                        else
-                        {
-                            throw new ArgumentException($"denominator: {Math.Sqrt(CountOfRemained * SumSquaredOfXRemained - SumOfXRemained * SumOfXRemained) * Math.Sqrt(CountOfRemained * SumSquaredOfYRemained - SumOfYRemained * SumOfYRemained)}" +
-                            $" numerator: {(CountOfRemained * SumOfXYRemained - SumOfXRemained * SumOfYRemained)} " +
-                            $"SumOfXYRemained: {SumOfXYRemained} SumOfXRemained: {SumOfXRemained} SumOfYRemained: {SumOfYRemained} " +
-                            $"SumSquaredOfXRemained: {SumSquaredOfXRemained} SumSquaredOfYRemained: {SumSquaredOfYRemained} " +
-                            $"CountOfRemained: {CountOfRemained} sigmaX: {sigmaX} sigmaY: {sigmaY}");
-                        }*/
                     }
                     if (double.IsInfinity(cXY))
                     {
@@ -2013,16 +1988,6 @@ namespace ClimateNetwork
                 GetMap();
             }
 
-            /*int minLength = int.MaxValue;
-            foreach (var pair in map)
-            {
-                if (pair.Value.Count < minLength)
-                {
-                    minLength = pair.Value.Count;
-                }
-            }
-            Console.WriteLine(minLength);*/
-
             Dictionary<string, List<Point>> tempMap = new Dictionary<string, List<Point>>();
             if (queryWindowLength > 0)
             {
@@ -2099,9 +2064,9 @@ namespace ClimateNetwork
             const string dir = @"/Users/xxx/xxx/xxx";
             DiskDataExtraction dde = new DiskDataExtraction(dir);
             dde.Init();
-            dde.ConstructNetworkBasicWindowDFT(queryWindowLength: 8000); // Line 434, set basic window size
+            dde.ConstructNetworkBasicWindowDFT(queryWindowLength: 8000); 
             //dde.ConstructNetwork();
-            //dde.ConstructNetworkBasicWindow(isTestForQueryTime: true); // Line 763, set basic window size
+            //dde.ConstructNetworkBasicWindow(isTestForQueryTime: true); 
 
             //dde.GetResultMap(false, queryWindowLength: 4000);
             //Console.WriteLine(dde.resultMapBWDFT.Count);
